@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#1a1a2e"/>
+  <rect x="340" y="175" width="120" height="100" rx="8" fill="#12121a"/>
+  <polygon points="370,185 370,265 440,225" fill="#7b2fff"/>
+  <text x="400" y="330" font-family="Arial,sans-serif" font-size="22" fill="#7b2fff" text-anchor="middle" font-weight="bold">GAMEWIRE</text>
+</svg>

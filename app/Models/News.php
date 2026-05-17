@@ -1,0 +1,127 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
+
+class News extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'slug',
+        'short_description',
+        'content',
+        'category_id',
+        'author_id',
+        'image',
+        'video_type',
+        'video_url',
+        'language',
+        'status',
+        'featured',
+        'views',
+        'published_at',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'featured' => 'boolean',
+            'published_at' => 'datetime',
+            'views' => 'integer',
+        ];
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function translations()
+    {
+        return $this->hasMany(Translation::class);
+    }
+
+    public function approvedComments()
+    {
+        return $this->comments()->where('is_approved', true)->latest();
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published')
+            ->where(function ($query) {
+                $query->whereNull('published_at')->orWhere('published_at', '<=', now());
+            });
+    }
+
+    public static function makeUniqueSlug(string $title, ?int $ignoreId = null): string
+    {
+        $base = Str::slug($title) ?: 'news';
+        $slug = $base;
+
+        while (static::where('slug', $slug)
+            ->when($ignoreId, fn ($query) => $query->whereKeyNot($ignoreId))
+            ->exists()) {
+            $slug = $base.'-'.random_int(1000, 9999);
+        }
+
+        return $slug;
+    }
+
+    public function translatedFor(?string $locale): array
+    {
+        $locale = $locale ?: app()->getLocale();
+        $translation = $this->relationLoaded('translations')
+            ? $this->translations->firstWhere('locale', $locale)
+            : $this->translations()->where('locale', $locale)->first();
+
+        return [
+            'title' => $translation?->translated_title ?: $this->title,
+            'short_description' => $translation?->translated_short_description ?: $this->short_description,
+            'content' => $translation?->translated_content ?: $this->content,
+            'is_original' => ! $translation,
+        ];
+    }
+
+    public function localizedTitle(?string $locale = null): string
+    {
+        $locale = $locale ?: app()->getLocale();
+
+        $translation = $this->relationLoaded('translations')
+            ? $this->translations->firstWhere('locale', $locale)
+            : $this->translations()->where('locale', $locale)->first();
+
+        return $translation?->translated_title ?: $this->title;
+    }
+
+    public function localizedShortDescription(?string $locale = null): string
+    {
+        $locale = $locale ?: app()->getLocale();
+        $translation = $this->relationLoaded('translations')
+            ? $this->translations->firstWhere('locale', $locale)
+            : $this->translations()->where('locale', $locale)->first();
+
+        return $translation?->translated_short_description ?: $this->short_description;
+    }
+}
