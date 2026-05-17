@@ -38,7 +38,6 @@ Route::get('/news/{news:slug}', [NewsController::class, 'show'])->name('news.sho
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/news', [AdminNewsController::class, 'index'])->name('news.index');
-    Route::get('/news/{id}', [AdminNewsController::class, 'show'])->name('news.show');
     Route::get('/news/{id}/edit', [AdminNewsController::class, 'edit'])->name('news.edit');
     Route::put('/news/{id}', [AdminNewsController::class, 'update'])->name('news.update');
     Route::delete('/news/{id}', [AdminNewsController::class, 'destroy'])->name('news.destroy');

@@ -28,7 +28,6 @@ class UpdateNewsRequest extends FormRequest
             'short_description' => 'required|string|max:300',
             'content' => 'required|string|min:100',
             'category_id' => 'required|exists:categories,id',
-            'language' => 'required|in:en,ru,kz',
             'published_at' => 'nullable|date',
             'featured' => 'boolean',
             'video_type' => 'required|in:none,local,youtube',

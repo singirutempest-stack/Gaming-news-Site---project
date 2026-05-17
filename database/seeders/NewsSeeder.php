@@ -71,7 +71,6 @@ class NewsSeeder extends Seeder
                         'youtube' => 'M7lc1UVf-VE',
                         default   => null,
                     },
-                    'language'     => ['en', 'ru', 'kz'][$index % 3],
                     'status'       => $index % 5 === 0 ? 'draft' : 'published',
                     'featured'     => $index < 4,
                     'views'        => random_int(120, 9000),

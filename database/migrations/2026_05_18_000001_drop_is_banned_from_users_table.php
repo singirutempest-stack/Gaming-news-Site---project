@@ -9,15 +9,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('email_verification_code', 6)->nullable()->after('email_verified_at');
-            $table->timestamp('email_verification_code_expires_at')->nullable()->after('email_verification_code');
+            $table->dropColumn('is_banned');
         });
     }
 
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['email_verification_code', 'email_verification_code_expires_at']);
+            $table->boolean('is_banned')->default(false);
         });
     }
 };

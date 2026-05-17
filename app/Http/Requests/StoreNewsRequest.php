@@ -6,11 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreNewsRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return $this->user()?->role === 'admin' || $this->user()?->role === 'journalist';
-    }
-
     public function rules(): array
     {
         return [
@@ -18,7 +13,6 @@ class StoreNewsRequest extends FormRequest
             'short_description' => 'required|string|max:300',
             'content' => 'required|string|min:100',
             'category_id' => 'required|exists:categories,id',
-            'language' => 'required|in:en,ru,kz',
             'published_at' => 'nullable|date',
             'featured' => 'boolean',
             'video_type' => 'required|in:none,local,youtube',

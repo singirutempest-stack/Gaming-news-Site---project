@@ -22,7 +22,8 @@ class HomeController extends Controller
 
     private function trending()
     {
-        return News::where('status', 'published')
+        return News::with('translations')
+            ->where('status', 'published')
             ->where('published_at', '>=', now()->subDays(7))
             ->orderBy('views', 'desc')
             ->take(5)

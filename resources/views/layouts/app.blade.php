@@ -20,11 +20,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
-            <ul class="navbar-nav mx-auto">
-                @foreach ($navCategories as $category)
-                    <li class="nav-item"><a class="nav-link" href="{{ route('category.show', $category) }}">{{ $category->label() }}</a></li>
-                @endforeach
-            </ul>
+            <div class="mx-auto"></div>
             <div class="btn-group me-lg-3" role="group">
                 @foreach (['en' => 'EN', 'ru' => 'RU', 'kz' => 'KZ'] as $locale => $label)
                     <a class="btn btn-sm {{ app()->getLocale() === $locale ? 'btn-primary' : 'btn-outline-light' }}" href="{{ route('lang.switch', $locale) }}">{{ $label }}</a>

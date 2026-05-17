@@ -24,7 +24,7 @@
             @foreach ($categories as $category)
                 <a class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center" href="{{ route('category.show', $category) }}">
                     <span><i class="bi {{ $category->icon }}" style="color: {{ $category->color }}"></i> {{ $category->label() }}</span>
-                    <span class="badge bg-secondary">{{ $category->news_count ?? $category->news()->count() }}</span>
+                    <span class="badge bg-secondary">{{ $category->news_count }}</span>
                 </a>
             @endforeach
         </div>

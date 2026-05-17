@@ -24,11 +24,6 @@ class NewsController extends FrontendNewsController
         ]);
     }
 
-    public function show($id)
-    {
-        return redirect()->route('admin.news.edit', $id);
-    }
-
     public function edit($id)
     {
         return view('pages.news-form', [

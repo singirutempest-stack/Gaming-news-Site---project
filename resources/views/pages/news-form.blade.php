@@ -18,24 +18,12 @@
                     <label class="form-label">{{ __('app.title') }}</label>
                     <input class="form-control mb-3" name="title" value="{{ old('title', $news->title) }}" required>
 
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">{{ __('app.category') }}</label>
-                            <select class="form-select mb-3" name="category_id" required>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" @selected(old('category_id', $news->category_id) == $category->id)>{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">{{ __('app.language') }}</label>
-                            <select class="form-select mb-3" name="language">
-                                @foreach (['en' => 'EN', 'ru' => 'RU', 'kz' => 'KZ'] as $value => $label)
-                                    <option value="{{ $value }}" @selected(old('language', $news->language) === $value)>{{ $label }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+                    <label class="form-label">{{ __('app.category') }}</label>
+                    <select class="form-select mb-3" name="category_id" required>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}" @selected(old('category_id', $news->category_id) == $category->id)>{{ $category->name }}</option>
+                        @endforeach
+                    </select>
 
                     <label class="form-label">{{ __('app.short_description') }}</label>
                     <textarea class="form-control mb-3" name="short_description" maxlength="300" rows="3" required>{{ old('short_description', $news->short_description) }}</textarea>

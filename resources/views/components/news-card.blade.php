@@ -10,7 +10,7 @@
     @endif
     <div class="card-body d-flex flex-column gap-2">
         <div class="d-flex align-items-center justify-content-between gap-2">
-            <span class="badge" style="background: {{ $item->category->color ?? '#7b2fff' }}">{{ $item->category?->label() ?? __('app.news') }}</span>
+            <span class="badge" style="background: {{ $item->category->color }}">{{ $item->category->label() }}</span>
             <span class="small text-muted">{{ $item->published_at?->format('M d, Y') }}</span>
         </div>
         <h3 class="h5 mb-0"><a href="{{ route('news.show', $item) }}">{{ $item->localizedTitle() }}</a></h3>
