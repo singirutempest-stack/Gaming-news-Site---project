@@ -89,12 +89,21 @@ class News extends Model
         return $slug;
     }
 
+    public function localizedTitle(?string $locale = null): string
+    {
+        $translation = $this->translations->firstWhere('locale', $locale ?: app()->getLocale());
+        return $translation?->translated_title ?: $this->title;
+    }
+
+    public function localizedShortDescription(?string $locale = null): string
+    {
+        $translation = $this->translations->firstWhere('locale', $locale ?: app()->getLocale());
+        return $translation?->translated_short_description ?: $this->short_description;
+    }
+
     public function translatedFor(?string $locale): array
     {
-        $locale = $locale ?: app()->getLocale();
-        $translation = $this->relationLoaded('translations')
-            ? $this->translations->firstWhere('locale', $locale)
-            : $this->translations()->where('locale', $locale)->first();
+        $translation = $this->translations->firstWhere('locale', $locale ?: app()->getLocale());
 
         return [
             'title' => $translation?->translated_title ?: $this->title,
@@ -104,24 +113,4 @@ class News extends Model
         ];
     }
 
-    public function localizedTitle(?string $locale = null): string
-    {
-        $locale = $locale ?: app()->getLocale();
-
-        $translation = $this->relationLoaded('translations')
-            ? $this->translations->firstWhere('locale', $locale)
-            : $this->translations()->where('locale', $locale)->first();
-
-        return $translation?->translated_title ?: $this->title;
-    }
-
-    public function localizedShortDescription(?string $locale = null): string
-    {
-        $locale = $locale ?: app()->getLocale();
-        $translation = $this->relationLoaded('translations')
-            ? $this->translations->firstWhere('locale', $locale)
-            : $this->translations()->where('locale', $locale)->first();
-
-        return $translation?->translated_short_description ?: $this->short_description;
-    }
 }

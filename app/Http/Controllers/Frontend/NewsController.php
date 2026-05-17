@@ -116,7 +116,6 @@ class NewsController extends Controller
 
     protected function fillAndPersist(News $news, Request $request): void
     {
-        $oldStatus = $news->status;
         $validated = $request->validated();
         $validated['featured'] = $request->boolean('featured');
         $validated['author_id'] = $news->exists ? $news->author_id : $request->user()->id;
