@@ -31,7 +31,7 @@
             </div>
             <div class="mt-4 d-flex justify-content-center">{{ $news->links() }}</div>
         </div>
-        <div class="col-lg-3"><x-sidebar :trending="$trending" :categories="$categories" /></div>
+        <div class="col-lg-3"><x-sidebar :categories="$categories" /></div>
     </div>
 </div>
 @endsection

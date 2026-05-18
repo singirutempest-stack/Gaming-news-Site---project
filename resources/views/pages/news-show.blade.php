@@ -7,7 +7,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('app.home') }}</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('category.show', $news->category) }}">{{ $news->category->label() }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('news.index', ['category' => $news->category->slug]) }}">{{ $news->category->label() }}</a></li>
             <li class="breadcrumb-item active">{{ $display['title'] }}</li>
         </ol>
     </nav>
@@ -62,15 +62,7 @@
             </section>
         </article>
         <aside class="col-lg-4">
-            <section class="bg-surface border-gaming p-3 mb-4">
-                <h2 class="h4">{{ __('app.related_news') }}</h2>
-                <div class="d-flex flex-column gap-3">
-                    @foreach ($related as $item)
-                        <a href="{{ route('news.show', $item) }}">{{ $item->localizedTitle() }}</a>
-                    @endforeach
-                </div>
-            </section>
-            <x-sidebar :trending="$trending" :categories="\App\Models\Category::withCount('news')->get()" />
+            <x-sidebar :categories="$categories" />
         </aside>
     </div>
 </div>

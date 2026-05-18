@@ -20,20 +20,16 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate();
-
+        if (Auth::attempt($credentials)) {
             return redirect()->intended(Auth::user()->isAdmin() ? route('admin.dashboard') : route('home'));
         }
 
         return back()->withErrors(['email' => __('app.login_failed')])->onlyInput('email');
     }
 
-    public function destroy(Request $request)
+    public function destroy()
     {
         Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
 
         return redirect()->route('home');
     }

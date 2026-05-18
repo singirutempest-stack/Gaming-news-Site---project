@@ -24,7 +24,6 @@ class NewsController extends Controller
         return view('pages.news-index', [
             'news' => $query->paginate(9)->withQueryString(),
             'categories' => Category::withCount('news')->get(),
-            'trending' => $this->trending(),
         ]);
     }
 
@@ -39,18 +38,11 @@ class NewsController extends Controller
 
         $news->load(['category', 'author', 'translations', 'approvedComments.user']);
         $display = $news->translatedFor(app()->getLocale());
-        $related = News::with(['category', 'translations'])->published()
-            ->where('category_id', $news->category_id)
-            ->whereKeyNot($news->id)
-            ->latest('published_at')
-            ->take(5)
-            ->get();
 
         return view('pages.news-show', [
             'news' => $news,
             'display' => $display,
-            'related' => $related,
-            'trending' => $this->trending(),
+            'categories' => Category::withCount('news')->get(),
         ]);
     }
 
@@ -201,13 +193,4 @@ class NewsController extends Controller
         return $matches[1] ?? $url;
     }
 
-    private function trending()
-    {
-        return News::where('status', 'published')
-            ->with('translations')
-            ->where('published_at', '>=', now()->subDays(7))
-            ->orderBy('views', 'desc')
-            ->take(5)
-            ->get();
-    }
 }
