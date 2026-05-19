@@ -9,6 +9,7 @@
     <input class="form-control mb-3" type="text" name="name" placeholder="{{ __('app.name') }}" required>
     <input class="form-control mb-3" type="email" name="email" placeholder="{{ __('app.email') }}" required>
     <input class="form-control mb-3" type="password" name="password" placeholder="{{ __('app.password') }}" required>
+    <input class="form-control mb-3" type="password" name="password_confirmation" placeholder="{{ __('app.confirm_password') }}" required>
     <button class="btn btn-primary w-100">{{ __('app.register') }}</button>
     <p class="mt-3 mb-0 text-muted"><a href="{{ route('login') }}">{{ __('app.login') }}</a></p>
 </form>

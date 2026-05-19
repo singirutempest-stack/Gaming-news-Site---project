@@ -26,6 +26,7 @@ return [
     'email' => 'Email',
     'password' => 'Құпия сөз',
     'name' => 'Аты',
+    'confirm_password' => 'Құпия сөзді растау',
     'save' => 'Сақтау',
     'add_news' => 'Жаңалық қосу',
     'edit_news' => 'Жаңалықты өзгерту',

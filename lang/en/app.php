@@ -26,6 +26,7 @@ return [
     'email' => 'Email',
     'password' => 'Password',
     'name' => 'Name',
+    'confirm_password' => 'Confirm password',
     'save' => 'Save',
     'add_news' => 'Add News',
     'edit_news' => 'Edit News',
