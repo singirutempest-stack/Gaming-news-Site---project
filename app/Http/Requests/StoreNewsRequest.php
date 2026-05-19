@@ -9,7 +9,7 @@ class StoreNewsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|min:5|max:255|unique:news,title',
+            'title' => 'required|string|min:5|max:255',
             'short_description' => 'required|string|max:300',
             'content' => 'required|string|min:100',
             'category_id' => 'required|exists:categories,id',
