@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -106,7 +107,7 @@ class NewsController extends Controller
         $validated = $request->validated();
         $validated['featured'] = $request->boolean('featured');
         $validated['author_id'] = $news->exists ? $news->author_id : $request->user()->id;
-        $validated['slug'] = News::makeUniqueSlug($validated['title'], $news->id);
+        $validated['slug'] = Str::slug($validated['title']);
         $validated['published_at'] = $validated['published_at'] ?: ($validated['status'] === 'published' ? now() : null);
         $translations = $validated['translations'] ?? [];
         unset($validated['translations']);

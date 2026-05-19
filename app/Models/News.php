@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Str;
 
 class News extends Model
 {
@@ -70,20 +69,6 @@ class News extends Model
             ->where(function ($query) {
                 $query->whereNull('published_at')->orWhere('published_at', '<=', now());
             });
-    }
-
-    public static function makeUniqueSlug(string $title, ?int $ignoreId = null): string
-    {
-        $base = Str::slug($title) ?: 'news';
-        $slug = $base;
-
-        while (static::where('slug', $slug)
-            ->when($ignoreId, fn ($query) => $query->whereKeyNot($ignoreId))
-            ->exists()) {
-            $slug = $base.'-'.random_int(1000, 9999);
-        }
-
-        return $slug;
     }
 
     public function localizedTitle(?string $locale = null): string
