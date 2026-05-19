@@ -10,9 +10,6 @@
     <input class="form-control mb-3" type="email" name="email" value="{{ old('email') }}" required>
     <label class="form-label">{{ __('app.password') }}</label>
     <input class="form-control mb-3" type="password" name="password" required>
-    <label class="form-check mb-3">
-        <input class="form-check-input" type="checkbox" name="remember"> {{ __('app.remember') }}
-    </label>
     <button class="btn btn-primary w-100">{{ __('app.login') }}</button>
     <p class="mt-3 mb-0 text-muted"><a href="{{ route('register') }}">{{ __('app.register') }}</a></p>
 </form>

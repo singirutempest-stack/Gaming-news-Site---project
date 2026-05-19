@@ -16,7 +16,7 @@ class StoreNewsRequest extends FormRequest
             'published_at' => 'nullable|date',
             'featured' => 'boolean',
             'video_type' => 'required|in:none,local,youtube',
-            'video_url' => 'required_if:video_type,youtube|nullable|url',
+            'video_url' => 'required_if:video_type,youtube|nullable',
             'video_file' => 'required_if:video_type,local|nullable|mimes:mp4,webm|max:51200',
             'image' => 'required|mimes:jpg,jpeg,png|max:2048',
             'status' => 'required|in:draft,published',

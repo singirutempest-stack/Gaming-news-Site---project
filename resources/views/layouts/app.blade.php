@@ -57,7 +57,7 @@
         <div class="row g-4">
             <div class="col-md-3"><h3 class="h5">GAMEWIRE</h3><p class="text-muted">{{ __('app.footer_about') }}</p></div>
             <div class="col-md-3"><h3 class="h5">{{ __('app.links') }}</h3><a class="d-block" href="{{ route('news.index') }}">{{ __('app.news') }}</a></div>
-            <div class="col-md-3"><h3 class="h5">{{ __('app.categories') }}</h3>@foreach($navCategories->take(6) as $category)<a class="d-block" href="{{ route('category.show', $category) }}">{{ $category->label() }}</a>@endforeach</div>
+            <div class="col-md-3"><h3 class="h5">{{ __('app.categories') }}</h3>@foreach($navCategories->take(6) as $category)<a class="d-block" href="{{ route('news.index', ['category' => $category->slug]) }}">{{ $category->label() }}</a>@endforeach</div>
             <div class="col-md-3"><h3 class="h5">{{ __('app.contacts') }}</h3><p class="text-muted mb-2">press@gamewire.test</p><div class="d-flex gap-2"><a href="#"><i class="bi bi-twitter-x"></i></a><a href="#"><i class="bi bi-youtube"></i></a><a href="#"><i class="bi bi-discord"></i></a></div></div>
         </div>
     </div>
