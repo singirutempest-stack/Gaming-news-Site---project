@@ -26,7 +26,6 @@ return [
     'email' => 'Email',
     'password' => 'Пароль',
     'name' => 'Имя',
-    'confirm_password' => 'Подтвердите пароль',
     'save' => 'Сохранить',
     'add_news' => 'Добавить новость',
     'edit_news' => 'Редактировать новость',
