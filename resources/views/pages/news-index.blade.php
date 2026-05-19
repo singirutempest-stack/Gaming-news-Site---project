@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', (isset($currentCategory) ? $currentCategory->label() : __('app.news')).' - '.config('app.name'))
+@section('title', __('app.news').' - '.config('app.name'))
 
 @section('content')
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('app.home') }}</a></li>
-            <li class="breadcrumb-item active">{{ isset($currentCategory) ? $currentCategory->label() : __('app.news') }}</li>
+            <li class="breadcrumb-item active">{{ __('app.news') }}</li>
         </ol>
     </nav>
 

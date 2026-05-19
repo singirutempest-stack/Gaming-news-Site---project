@@ -28,7 +28,6 @@ return [
     'name' => 'Name',
     'confirm_password' => 'Confirm password',
     'save' => 'Save',
-    'add' => 'Add',
     'add_news' => 'Add News',
     'edit_news' => 'Edit News',
     'title' => 'Title',

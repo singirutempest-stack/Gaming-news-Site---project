@@ -31,11 +31,6 @@ class NewsController extends Controller
     {
         abort_unless($news->status === 'published' || auth()->id() === $news->author_id || auth()->user()?->isAdmin(), 404);
 
-        if (! session()->has('viewed_'.$news->id)) {
-            $news->increment('views');
-            session()->put('viewed_'.$news->id, true);
-        }
-
         $news->load(['category', 'author', 'translations', 'approvedComments.user']);
         $display = $news->translatedFor(app()->getLocale());
 
